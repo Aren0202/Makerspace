@@ -9,16 +9,6 @@ function stopAllVideos() {
   });
 }
 
-video1.pause();
-video1.currentTime = 0;
-video1.load();
-video1.play();
-
-video2.pause();
-video2.currentTime = 0;
-video2.load();
-video2.play();
-
 function playVideo(number) {
   stopAllVideos();
   const vid = number === 1 ? video1 : video2;
@@ -29,14 +19,14 @@ function playVideo(number) {
 // Luisteren naar Firebase (ook op tablet)
 firebase.database().ref("action").on("value", (snapshot) => {
   const val = snapshot.val();
-  if (val === "left") playVideo(1);
+  if (val === "G") playVideo(1);
   if (val === "right") playVideo(2);
 });
 
 // Verzenden vanuit Makey Makey (alleen op laptop)
 document.addEventListener("keydown", function(e) {
   if (e.key === "ArrowLeft") {
-    firebase.database().ref("action").set("left");
+    firebase.database().ref("action").set("G");
   } else if (e.key === "ArrowRight") {
     firebase.database().ref("action").set("right");
   }
