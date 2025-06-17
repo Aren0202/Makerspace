@@ -18,21 +18,33 @@ function playVideo(number) {
 }
 
 let lastAction = null;
-let cooldown = false;
 
-firebase.database().ref("action").on("value"), (snapshot) => {
-  const val = snapshot.val();}
+firebase.database().ref("action").on("value", (snapshot) => {
+  const val = snapshot.val();
 
-  if (val !== lastAction && !cooldown) {
-    if (val === "left") playVideo }
+  if (val && val !== lastAction) {
+    if (val === "left") {
+      playVideo(1);
+    } else if (val === "right") {
+      playVideo(2);
+    }
 
-// Verzenden vanuit Makey Makey (laptop)
+    lastAction = val;
+  }
+});
+
 document.addEventListener("keydown", function(e) {
   if (e.key === "ArrowLeft") {
     firebase.database().ref("action").set("left");
-    setTimeout(() => location.reload(), 500); // vernieuw pagina na 0,5 sec
+    setTimeout(() => {
+      firebase.database().ref("action").set(null); // reset naar leeg
+    }, 1000);
+    setTimeout(() => location.reload(), 500);
   } else if (e.key === "ArrowRight") {
     firebase.database().ref("action").set("right");
-    setTimeout(() => location.reload(), 500); // vernieuw pagina na 0,5 sec
+    setTimeout(() => {
+      firebase.database().ref("action").set(null); // reset naar leeg
+    }, 1000);
+    setTimeout(() => location.reload(), 500);
   }
 });
