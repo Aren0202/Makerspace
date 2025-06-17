@@ -18,15 +18,13 @@ function playVideo(number) {
 }
 
 let lastAction = null;
+let cooldown = false;
 
-firebase.database().ref("action").on("value", (snapshot) => {
-  const val = snapshot.val();
-  if (val !== lastAction) {
-    if (val === "left") playVideo(1);
-    if (val === "right") playVideo(2);
-    lastAction = val;
-  }
-});
+firebase.database().ref("action").on("value"), (snapshot) => {
+  const val = snapshot.val();}
+
+  if (val !== lastAction && !cooldown) {
+    if (val === "left") playVideo }
 
 // Verzenden vanuit Makey Makey (laptop)
 document.addEventListener("keydown", function(e) {
