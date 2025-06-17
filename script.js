@@ -17,11 +17,15 @@ function playVideo(number) {
   vid.play();
 }
 
-// Luisteren naar Firebase (tablet)
+let lastAction = null;
+
 firebase.database().ref("action").on("value", (snapshot) => {
   const val = snapshot.val();
-  if (val === "left") playVideo(1);
-  if (val === "right") playVideo(2);
+  if (val !== lastAction) {
+    if (val === "left") playVideo(1);
+    if (val === "right") playVideo(2);
+    lastAction = val;
+  }
 });
 
 // Verzenden vanuit Makey Makey (laptop)
