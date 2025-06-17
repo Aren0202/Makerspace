@@ -9,6 +9,16 @@ function stopAllVideos() {
   });
 }
 
+video1.pause();
+video1.currentTime = 0;
+video1.load();
+video1.play();
+
+video2.pause();
+video2.currentTime = 0;
+video2.load();
+video2.play();
+
 function playVideo(number) {
   stopAllVideos();
   const vid = number === 1 ? video1 : video2;
