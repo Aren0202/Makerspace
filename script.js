@@ -31,3 +31,29 @@ document.addEventListener("keydown", function(e) {
     firebase.database().ref("action").set("right");
   }
 });
+
+setTimeout(() => {
+  location.reload();
+}, 500);
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowLeft") {
+    video2.pause();
+    video1.currentTime = 0;
+    video1.load();
+    video1.play();
+    setTimeout(() => {
+      location.reload();
+    }, 500); // Refresh na 0,5 seconde
+  }
+
+  if (event.key === "ArrowRight") {
+    video1.pause();
+    video2.currentTime = 0;
+    video2.load();
+    video2.play();
+    setTimeout(() => {
+      location.reload();
+    }, 500); // Refresh na 0,5 seconde
+  }
+});
