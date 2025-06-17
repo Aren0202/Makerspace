@@ -19,14 +19,14 @@ function playVideo(number) {
 // Luisteren naar Firebase (ook op tablet)
 firebase.database().ref("action").on("value", (snapshot) => {
   const val = snapshot.val();
-  if (val === "G") playVideo(1);
+  if (val === "left") playVideo(1);
   if (val === "right") playVideo(2);
 });
 
 // Verzenden vanuit Makey Makey (alleen op laptop)
 document.addEventListener("keydown", function(e) {
   if (e.key === "ArrowLeft") {
-    firebase.database().ref("action").set("G");
+    firebase.database().ref("action").set("left");
   } else if (e.key === "ArrowRight") {
     firebase.database().ref("action").set("right");
   }
